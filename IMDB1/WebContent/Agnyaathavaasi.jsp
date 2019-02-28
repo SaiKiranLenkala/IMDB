@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <head>
   <title>Agnyaathavaasi</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="Comment.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <style>
@@ -53,7 +53,7 @@
    
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> <%=request.getSession().getAttribute("userName") %></a></li>
      
       </ul>
     </div>
@@ -76,6 +76,59 @@
     </div>
   </div>
 </div><br><br>
+
+<div class="w3-container w3-red">
+  <footer class="container-fluid text-center">
+  <p></p>  
+  <form action="../Login.jsp" method="post" class="form-inline"  >
+  <h2>Rating & comments</h2>
+  
+<span  onmouseover="starmark(this)" onclick="starmark(this)" id="1one" style="font-size:40px;cursor:pointer;"  class="fa fa-star checked"></span>
+<span onmouseover="starmark(this)" onclick="starmark(this)" id="2one"  style="font-size:40px;cursor:pointer;" class="fa fa-star "></span>
+<span onmouseover="starmark(this)" onclick="starmark(this)" id="3one"  style="font-size:40px;cursor:pointer;" class="fa fa-star "></span>
+<span onmouseover="starmark(this)" onclick="starmark(this)" id="4one"  style="font-size:40px;cursor:pointer;" class="fa fa-star"></span>
+<span onmouseover="starmark(this)" onclick="starmark(this)" id="5one"  style="font-size:40px;cursor:pointer;" class="fa fa-star"></span>
+<br/>
+<input type="text"  name="comment" style="margin-top:5px;" class="form-control"  id="comment" placeholder="Enter your review" >
+<!-- <button onclick="result(); return false">Get Result</button> -->
+<input  type="hidden" name="rating" id="rating">
+<input type="submit" value="Submit" >
+<!-- <button  onclick="result()" type="button" style="margin-top:10px;margin-left:5px;" class="btn btn-lg btn-success">Submit</button> -->
+</form>
+<p id="countOfStars" hidden ></p>
+
+</footer>
+</div>
+</body>
+ <script>
+var count;
+function starmark(item)
+{
+count=item.id[0];
+sessionStorage.starRating = count;
+var subid= item.id.substring(1);
+for(var i=0;i<5;i++)
+{
+if(i<count)
+{
+document.getElementById((i+1)+subid).style.color="orange";
+}
+else
+{
+document.getElementById((i+1)+subid).style.color="black";
+}
+}
+}
+//function result()
+//{
+	document.getElementById("countOfStars").innerHTML = count;
+	 document.getElementById("rating").value=count;
+//Rating : Count
+//Review : Comment(id)
+//alert("Rating : "+count+"\nReview : "+document.getElementById("comment").value);
+//}
+</script>
+
 
 <footer class="container-fluid text-center">
   <p>IMDb Copyright</p>  
